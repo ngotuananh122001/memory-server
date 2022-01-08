@@ -3,11 +3,11 @@ Content-Type: application/json
 
 // Gui json nen phai thoi dung dinh dang nay
 {
-    "username": "ngotuananh",
+    "username": "klong",
     "password": "123"
 }
 
-###
+### Login
 POST http://localhost:5000/auth/login
 Content-Type: application/json
 
@@ -16,13 +16,19 @@ Content-Type: application/json
     "password": "123"
 }
 
-###
+### Create event
 POST http://localhost:5000/event
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWQ5MGFiM2EwMTQxNzk1NTljMmIzNTkiLCJpYXQiOjE2NDE2MTQwMDN9.lPQBKjqwhPXQpkXVFJyluXh1DFKTs_vKXQ3QnT2a2Fk
+
 
 {
     "title": "Learn ExpressJS",
     "description": "abc",
-    "url": "google.com",
+    "url": "express.org",
     "status": "LEARNING"
 }
+
+### Get events
+GET http://localhost:5000/event
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWQ5MGFiM2EwMTQxNzk1NTljMmIzNTkiLCJpYXQiOjE2NDE2MTQwMDN9.lPQBKjqwhPXQpkXVFJyluXh1DFKTs_vKXQ3QnT2a2Fk
