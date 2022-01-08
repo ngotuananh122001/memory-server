@@ -1,0 +1,28 @@
+POST http://localhost:5000/auth/register
+Content-Type: application/json
+
+// Gui json nen phai thoi dung dinh dang nay
+{
+    "username": "ngotuananh",
+    "password": "123"
+}
+
+###
+POST http://localhost:5000/auth/login
+Content-Type: application/json
+
+{
+    "username": "ngotuananh",
+    "password": "123"
+}
+
+###
+POST http://localhost:5000/event
+Content-Type: application/json
+
+{
+    "title": "Learn ExpressJS",
+    "description": "abc",
+    "url": "google.com",
+    "status": "LEARNING"
+}
