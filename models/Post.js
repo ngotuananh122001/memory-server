@@ -1,6 +1,7 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
-const postSchema = new mongoose.Schema({
+const Schema = mongoose.Schema;
+const postSchema = new Schema({
     title: String,
     message: String,
     creator: String,
@@ -12,10 +13,14 @@ const postSchema = new mongoose.Schema({
     },
     createdAt: {
         type: Date,
-        default: new Date(),
+        default: Date.now,
+    },
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'users',
     },
 });
 
-const PostModel = mongoose.model("posts", postSchema);
+const PostModel = mongoose.model('posts', postSchema);
 
 export default PostModel;

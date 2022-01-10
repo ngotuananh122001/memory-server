@@ -14,7 +14,7 @@ export const verifyToken = (req, res, next) => {
         // 401, not authoriztion
         return res.status(401).json({
             success: false,
-            message: 'Access token not found',
+            message: 'Access token khong tim thay',
         });
     }
 

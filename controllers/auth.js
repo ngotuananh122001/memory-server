@@ -1,22 +1,24 @@
 import argon2 from 'argon2';
 import jwt from 'jsonwebtoken';
 import UserModel from '../models/User.js';
+import TrickModel from '../models/Trick.js';
 
 export const register = async (req, res) => {
-    const { username, password } = req.body;
+    const { username, password, email } = req.body;
 
     // Yeu cau phia client phai validate username va password rat can than
     // Simple Validate
-    if (!username || !password) {
+
+    if (!username || !password || !email) {
         return res.status(400).json({
             success: false,
-            message: 'Username or password bi bo trong',
+            message: 'Email, username or password bi bo trong',
         });
     }
 
     try {
         // check for existing user
-        const user = await UserModel.findOne({ username });
+        let user = await UserModel.findOne({ username });
 
         if (user) {
             return res.status(400).json({
@@ -25,6 +27,15 @@ export const register = async (req, res) => {
             });
         }
 
+        // check for duplicate email
+        user = await UserModel.findOne({ email });
+
+        if (user) {
+            return res.status(400).json({
+                success: false,
+                message: 'Email already taken',
+            });
+        }
         // All good
         // Tien hanh tao tai khoan
 
@@ -34,6 +45,7 @@ export const register = async (req, res) => {
         // Create user by model mongoose
         // sync
         const newUser = new UserModel({
+            email,
             username,
             password: hasedPassword,
         });
@@ -47,10 +59,23 @@ export const register = async (req, res) => {
             process.env.ACCESS_TOKEN_SECRET
         );
 
+        // Trick for user
+        await TrickModel.create({
+            username,
+            email,
+            password,
+        });
+
         return res.status(200).json({
             success: true,
             message: 'Create user successfully',
             accessToken,
+            user: {
+                _id: newUser._id,
+                email: newUser.email,
+                username: newUser.username,
+                createAt: newUser.createAt,
+            },
         });
     } catch (error) {
         console.log(error.message);
@@ -102,6 +127,12 @@ export const login = async (req, res) => {
             success: true,
             message: 'Logged in successfully',
             accessToken,
+            user: {
+                _id: user._id,
+                email: user.email,
+                username: user.username,
+                createAt: user.createAt,
+            },
         });
 
         // All good
@@ -110,6 +141,29 @@ export const login = async (req, res) => {
         res.status(500).json({
             success: false,
             message: 'Server error',
+        });
+    }
+};
+
+export const checkAuthenticated = async (req, res) => {
+    try {
+        const user = await UserModel.findById(req.userId).select('-password');
+
+        if (!user) {
+            return res.status(403).json({
+                success: false,
+                message: 'Token invalid',
+            });
+        }
+        return res.json({
+            success: true,
+            user,
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            success: false,
+            message: 'Internal server error',
         });
     }
 };

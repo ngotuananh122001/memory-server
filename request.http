@@ -3,7 +3,7 @@ Content-Type: application/json
 
 // Gui json nen phai thoi dung dinh dang nay
 {
-    "username": "klong",
+    "username": "ngotuananh",
     "password": "123"
 }
 
@@ -13,7 +13,7 @@ Content-Type: application/json
 
 {
     "username": "ngotuananh",
-    "password": "123"
+    "password": "1234"
 }
 
 ### Create event
@@ -32,3 +32,23 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWQ5M
 ### Get events
 GET http://localhost:5000/event
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWQ5MGFiM2EwMTQxNzk1NTljMmIzNTkiLCJpYXQiOjE2NDE2MTQwMDN9.lPQBKjqwhPXQpkXVFJyluXh1DFKTs_vKXQ3QnT2a2Fk
+
+
+# For post
+### Create a post
+POST http://localhost:5000/posts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWQ5MjVhN2JlMmU0Y2YyOGJiZDc4N2EiLCJpYXQiOjE2NDE2MjExMzF9.VBIij9pLPn0d8n4MVC6B25dbRdqwNz4kAzNpKm1xnEo
+Content-Type: application/json
+
+{
+    
+}
+
+### GEt all posts
+GET  http://localhost:5000/posts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWQ5MjVhN2JlMmU0Y2YyOGJiZDc4N2EiLCJpYXQiOjE2NDE2MjExMzF9.VBIij9pLPn0d8n4MVC6B25dbRdqwNz4kAzNpKm1xnEo
+
+
+### Delete Post
+DELETE http://localhost:5000/posts/61da81fcd973da641
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWRhODAwOGQ5NzNkYTY0MTRiMjY5NjIiLCJpYXQiOjE2NDE3MTI5OTN9.k39YfyRKhjjKEPlZhYmMf54vRPsBXkOZECiQIXmQQls
