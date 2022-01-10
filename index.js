@@ -23,16 +23,9 @@ app.use('/event', verifyToken, eventRouter);
 // const CONNECTION_URL =
 //     'mongodb+srv://ngotuananh:doithua2001@cluster0.h652s.mongodb.net/memoryDB?retryWrites=true&w=majority';
 
-const accessToken = jwt.sign(
-    { userId: '61daa820e4db8735a8f15361' },
-    process.env.ACCESS_TOKEN_SECRET
-);
-
-console.log(accessToken);
-
 // local mongodb
 const CONNECTION_URL = `mongodb://localhost:27017/${process.env.DB_NAME}`;
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 mongoose
     .connect(CONNECTION_URL)
     .then((data) => console.log('Ket noi db thanh cong!'))
