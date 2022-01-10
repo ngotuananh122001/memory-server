@@ -22,7 +22,7 @@ app.use('/auth', authRouter);
 app.use('/event', verifyToken, eventRouter);
 const CONNECTION_URL = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.h652s.mongodb.net/memoryDB?retryWrites=true&w=majority`;
 
-// local mongodb
+
 // const CONNECTION_URL = `mongodb://localhost:27017/${process.env.DB_NAME}`;
 const PORT = process.env.PORT || 5000;
 mongoose
